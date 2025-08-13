@@ -1,0 +1,112 @@
+# OS & System Files
+.DS_Store
+Thumbs.db
+*.tmp
+*.temp
+
+# Logs
+*.log
+logs/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment Variables
+.env
+.env.*
+!.env.example
+
+# Frontend (Vite + React + Node.js)
+farmgear-app-frontend/node_modules/
+farmgear-app-frontend/dist/
+farmgear-app-frontend/.vite/
+farmgear-app-frontend/coverage/
+farmgear-app-frontend/.eslintcache
+farmgear-app-frontend/.tsbuildinfo
+farmgear-app-frontend/.env
+farmgear-app-frontend/.env.*
+!farmgear-app-frontend/.env.example
+
+# Frontend certificates (SSL/TLS for dev)
+farmgear-app-frontend/certs/
+
+# Project documentation (ignore tracked docs going forward)
+farmgear-app-frontend/docs/
+FarmGear_Application/FarmGear_Application/docs/
+
+# Backend (.NET Core/ASP.NET)
+**/bin/
+**/obj/
+.vs/
+**/.vs/
+*.user
+*.suo
+*.cache
+project.lock.json
+project.fragment.lock.json
+
+# Test & Coverage Reports
+FarmGear_Application/TestResults/
+FarmGear_Application/**/TestResults/
+FarmGear_Application/**/coverage/
+coverage/
+*.coverage
+*.coveragexml
+
+# Application Settings (exclude sensitive environment configs)
+FarmGear_Application/FarmGear_Application/appsettings.Local.json
+FarmGear_Application/FarmGear_Application/appsettings.Production.json
+FarmGear_Application/FarmGear_Application/appsettings.Staging.json
+# Keep base and development configs tracked for team collaboration
+!FarmGear_Application/FarmGear_Application/appsettings.json
+!FarmGear_Application/FarmGear_Application/appsettings.Development.json
+!FarmGear_Application/FarmGear_Application/appsettings.Docker.json
+!FarmGear_Application/FarmGear_Application/appsettings.Testing.json
+
+# User Uploads & Dynamic Content
+FarmGear_Application/FarmGear_Application/wwwroot/uploads/
+FarmGear_Application/FarmGear_Application/wwwroot/avatars/
+FarmGear_Application/FarmGear_Application/wwwroot/equipment/
+
+# Docker
+docker-compose.override.yml
+Dockerfile.local
+
+# IDE & Editors
+.idea/
+.vscode/settings.json
+.vscode/launch.json
+*.swp
+*.swo
+*.orig
+*~
+
+# Certificates & Keys (Security)
+**/certs/**
+*.pem
+*.key
+*.crt
+*.p12
+*.pfx
+
+# Package Managers
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Operating System
+.DS_Store?
+ehthumbs.db
+Icon?
+Thumbs.db
+
+# JetBrains IDEs
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# Visual Studio
+.vs/
+*.vcxproj.user

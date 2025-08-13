@@ -1,0 +1,13 @@
+# Exclude unnecessary folders
+**/bin/
+**/obj/
+# User or IDE files
+**/*.user
+**/*.suo
+.vscode
+.vs/
+# Test outputs
+TestResults/
+# Git
+.git
+.gitignore

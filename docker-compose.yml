@@ -1,0 +1,81 @@
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: farmgear-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: devpass
+      MYSQL_DATABASE: FarmGearDevDb
+      MYSQL_USER: farmgear
+      MYSQL_PASSWORD: devpass
+    # Port 3306 is occupied locally; map host 3307 to container 3306
+    ports:
+      - "3307:3306"
+    command: --default-authentication-plugin=mysql_native_password
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  redis:
+    image: redis:7-alpine
+    container_name: farmgear-redis
+    command: redis-server --appendonly yes
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: ./FarmGear_Application
+      dockerfile: Dockerfile
+    container_name: farmgear-backend
+    environment:
+      ASPNETCORE_ENVIRONMENT: "Development"
+      ASPNETCORE_URLS: "https://+:8443"
+      ASPNETCORE_Kestrel__Certificates__Default__Path: "/https/aspnetapp.pfx"
+      ASPNETCORE_Kestrel__Certificates__Default__Password: "changeit"
+      ConnectionStrings__DefaultConnection: "Server=mysql;Port=3306;Database=FarmGearDevDb;User=farmgear;Password=devpass;"
+      RedisSettings__ConnectionString: "redis:6379,allowAdmin=true"
+      ApplicationSettings__ApplicationUrl: "https://localhost:8443"
+      ApplicationSettings__FileStorage__BaseUrl: "https://localhost:8443/uploads"
+    ports:
+      - "8443:8443"
+    volumes:
+      - ./certs/backend:/https:ro
+      - backend_uploads:/app/wwwroot/uploads
+    depends_on:
+      mysql:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  frontend:
+    image: node:22-alpine
+    container_name: farmgear-frontend
+    working_dir: /app
+    volumes:
+      - ./farmgear-app-frontend:/app
+      - frontend_node_modules:/app/node_modules
+    command: sh -c "npm ci && npm run dev -- --host"
+    environment:
+      VITE_API_BASE_URL: "https://localhost:8443"
+      NODE_OPTIONS: "--openssl-legacy-provider"
+    ports:
+      - "3000:5173"
+    depends_on:
+      - backend
+
+volumes:
+  mysql_data:
+  redis_data:
+  backend_uploads:
+  frontend_node_modules:

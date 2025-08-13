@@ -1,0 +1,30 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Launch FarmGear API",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build",
+      "program": "${workspaceFolder}/FarmGear_Application/bin/Debug/net8.0/FarmGear_Application.exe",
+      "args": [],
+      "cwd": "${workspaceFolder}/FarmGear_Application",
+      "env": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "launchBrowser": {
+        "enabled": true,
+        "args": "http://localhost:5136/swagger"
+      },
+      "dotnetRunMessages": true,
+      "hotReloadEnabled": true,
+      "stopAtEntry": false
+    },
+    {
+      "name": "Attach to FarmGear API",
+      "type": "coreclr",
+      "request": "attach",
+      "processId": "${command:pickProcess}"
+    }
+  ]
+} 
