@@ -35,7 +35,7 @@ The stack starts the following containers. Make sure these host ports are free:
 - Backend (ASP.NET Core, HTTPS): https://localhost:8443
   - Static uploads: https://localhost:8443/uploads
   - Uses local dev certificate mounted from `certs/backend/aspnetapp.pfx`
-- Frontend (Vite Dev Server): https://localhost:3000
+- Frontend (Vite Dev Server, HTTPS): https://localhost:3000
   - Talks to backend via `VITE_API_BASE_URL`
 - MySQL: localhost:3307 (mapped to container 3306)
 - Redis: localhost:6379
@@ -49,7 +49,7 @@ Port summary:
 
 ## First Run Notes
 - The backend automatically applies EF Core migrations and seeds roles on startup.
-- The frontend installs dependencies (npm ci) in the container and starts the Vite dev server.
+- The frontend installs dependencies (npm ci) in the container and starts the Vite dev server over HTTPS when certs exist in `farmgear-app-frontend/certs` (created by `./setup.ps1`).
 - If you see certificate warnings in the browser, trust local dev certificates or proceed for local testing.
 
 ## Health Checks & Docs

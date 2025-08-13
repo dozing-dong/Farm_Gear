@@ -17,7 +17,7 @@ FarmGear is a modern agricultural equipment rental platform built with React, co
 
 **HttpOnly Cookie Authentication** - Enhanced security implementation:
 - ✅ HttpOnly Cookie for token storage (XSS protection)
-- ✅ Frontend HTTP mode for development
+- ✅ Frontend runs on HTTPS in development (mkcert/OpenSSL certs created by `../../setup.ps1`)
 - ✅ Backend HTTPS API requests
 - ✅ Automatic cookie management by browser
 - ❌ No localStorage token storage
@@ -99,6 +99,7 @@ The project includes a set of reusable UI components built with Radix UI and sty
 - **TypeScript**: Configured with strict mode and path mapping
 - **Tailwind CSS**: Configured with content paths for optimal builds
 - **Vite**: Configured with path aliases for clean imports
+- **Vite Dev HTTPS**: If `certs/localhost-key.pem` and `certs/localhost.pem` exist, the dev server starts over HTTPS automatically
 - **ESLint**: Configured for React and TypeScript development
 
 ## 📚 Documentation
